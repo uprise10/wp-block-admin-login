@@ -2,22 +2,19 @@
 
 class WP_Block_Admin_Login_Settings {
 	private static $instance = null;
-	protected $text_domain;
 	protected $option_name = 'wp_block_admin_settings';
 	protected $options = null;
 
 
 	public function __construct() {
-		$this->text_domain = WP_Block_Admin_Login_Core::instance()->text_domain;
-
 		// Load options
 		$this->options = WP_Block_Admin_Login_Core::instance()->options;
 
 		// Initialize theme options when in WP admin
-		add_action( 'admin_menu', array( &$this, 'add_settings_page' ) );
+		add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
 
 		// Initialize general theme settings
-		add_action( 'admin_init', array( &$this, 'init_settings' ) );
+		add_action( 'admin_init', array( $this, 'init_settings' ) );
 	}
 
 	/**
@@ -26,12 +23,12 @@ class WP_Block_Admin_Login_Settings {
 	public function add_settings_page() {
 
 		add_options_page(
-			__( 'Block user logins', $this->text_domain ),
-			__( 'Block user logins', $this->text_domain ),
+			__( 'Block user logins', 'block-user-login' ),
+			__( 'Block user logins', 'block-user-login' ),
 			'manage_options',
 			'block-login-settings.php',
 			array(
-				&$this,
+				$this,
 				'settings_page'
 			)
 		);
@@ -46,7 +43,7 @@ class WP_Block_Admin_Login_Settings {
 
 		<div class="wrap">
 			<div id="icon-themes" class="icon32"></div>
-			<h2><?php _e( 'Block user logins settings', $this->text_domain ) ?></h2>
+			<h2><?php _e( 'Block user logins settings', 'block-user-login' ) ?></h2>
 
 			<?php settings_errors(); ?>
 
@@ -80,9 +77,9 @@ class WP_Block_Admin_Login_Settings {
 		# Initiate the section for our settings
 		add_settings_section(
 			$this->option_name,
-			__( 'General settings', $this->text_domain ),
+			__( 'General settings', 'block-user-login' ),
 			function () {
-				echo '<p class="description">' . __( 'With this plugin you can directly block login attempts and redirect these attempts to just annoy them. It is our strong belief that Rickrolling will help that cause.', $this->text_domain ) . '</p>';
+				echo '<p class="description">' . __( 'With this plugin you can directly block login attempts and redirect these attempts to just annoy them. It is our strong belief that Rickrolling will help that cause.', 'block-user-login' ) . '</p>';
 			},
 			'block_login_general_settings'
 		);
@@ -100,16 +97,16 @@ class WP_Block_Admin_Login_Settings {
 
 		// General setting fields
 
-		$this->add_field( 'radio', 'who_to_block', __( 'Who to block?', $this->text_domain ), 'block_login_general_settings', array(
+		$this->add_field( 'radio', 'who_to_block', __( 'Who to block?', 'block-user-login' ), 'block_login_general_settings', array(
 			'values' => array(
-				'admin' => __( '"admin" user only', $this->text_domain ),
-				'everyone' => __( 'Everyone, but the current users on this website', $this->text_domain ),
+				'admin' => __( '"admin" user only', 'block-user-login' ),
+				'everyone' => __( 'Everyone, but the current users on this website', 'block-user-login' ),
 			)
 		) );
 
-		$this->add_field( 'text', 'redirect_to', __( 'After block redirect user to', $this->text_domain ), 'block_login_general_settings', array(
+		$this->add_field( 'text', 'redirect_to', __( 'After block redirect user to', 'block-user-login' ), 'block_login_general_settings', array(
 			'placeholder' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-			'description' => __( 'By default the blocked user will be Rickrolled. Of course.', $this->text_domain )
+			'description' => __( 'By default the blocked user will be Rickrolled. Of course.', 'block-user-login' )
 		) );
 
 	}

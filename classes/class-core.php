@@ -6,7 +6,6 @@
 class WP_Block_Admin_Login_Core {
 
 	private static $instance = null;
-	public $text_domain = 'wpba';
 	public $options;
 	public $option_name = 'wp_block_admin_settings';
 	protected $test_mode = true;

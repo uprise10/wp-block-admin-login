@@ -2,11 +2,8 @@
 
 class WP_Block_Admin_Login_Forms {
 
-	protected $text_domain;
 
-	function __construct() {
-		$this->text_domain = WP_Block_Admin_Login_Core::instance()->text_domain;
-	}
+	function __construct() {}
 
 	/**
 	 * @param        $value
@@ -90,7 +87,7 @@ class WP_Block_Admin_Login_Forms {
 		$output = '<input type="file" name="' . $name . '" id="' . $args['id'] . '">';
 
 		if ( ! empty( $value ) ) {
-			$output .= '<br><small>' . __( 'Current file', $this->text_domain ) . ': <a href="' . $value . '" target="_blank">' . $value . '</a></small>';
+			$output .= '<br><small>' . __( 'Current file', 'block-user-login' ) . ': <a href="' . $value . '" target="_blank">' . $value . '</a></small>';
 		}
 
 		return $output;
@@ -444,7 +441,7 @@ class WP_Block_Admin_Login_Forms {
 			'name'             => $name,
 			'id'               => $args['id'],
 			'selected'         => $value,
-			'show_option_none' => __( 'Select a page', $this->text_domain ),
+			'show_option_none' => __( 'Select a page', 'block-user-login' ),
 			'echo'             => false
 		);
 
