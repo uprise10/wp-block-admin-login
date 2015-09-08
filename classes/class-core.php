@@ -25,6 +25,9 @@ class WP_Block_Admin_Login_Core {
 
 		$block_user = false;
 		$who_to_block = WP_Block_Admin_Login_Settings::instance()->get_option('who_to_block');
+		if( empty( $who_to_block ) ) {
+			$who_to_block = 'admin';
+		}
 		$redirect_to = WP_Block_Admin_Login_Settings::instance()->get_option('redirect_to');
 		if( empty( $redirect_to ) ) {
 			$redirect_to = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
